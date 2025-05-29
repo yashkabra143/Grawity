@@ -38,7 +38,24 @@ export default function Header() {
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Left Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.slice(0, 2).map((link) => (
+              <Link key={link.href} href={link.href}>
+                <span
+                  className={`font-medium transition-colors duration-300 cursor-pointer ${
+                    location === link.href
+                      ? "text-saffron"
+                      : "text-charcoal hover:text-saffron"
+                  }`}
+                >
+                  {link.label}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Centered Logo */}
           <Link href="/">
             <motion.div
               className="flex items-center space-x-3 cursor-pointer"
@@ -56,29 +73,22 @@ export default function Header() {
               </div>
             </motion.div>
           </Link>
-
-          {/* Desktop Navigation */}
+            
+          {/* Right Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
+            {navLinks.slice(2).map((link) => (
               <Link key={link.href} href={link.href}>
-                <motion.a
-                  className={`font-medium transition-colors duration-300 ${
+                <span
+                  className={`font-medium transition-colors duration-300 cursor-pointer ${
                     location === link.href
                       ? "text-saffron"
                       : "text-charcoal hover:text-saffron"
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   {link.label}
-                </motion.a>
+                </span>
               </Link>
             ))}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="gradient-saffron-turmeric text-white px-6 py-2 rounded-full font-medium hover:shadow-lg">
-                Order Now
-              </Button>
-            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
