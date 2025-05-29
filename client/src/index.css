@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 210 11% 15%; /* #2C3E50 charcoal */
+  --muted: 60 5% 96%;
+  --muted-foreground: 25 5% 45%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 11% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 11% 15%;
+  --border: 20 6% 90%;
+  --input: 20 6% 90%;
+  --primary: 28 100% 50%; /* #FF8500 saffron */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 36 90% 55%; /* #F4A024 turmeric */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 8 81% 57%; /* #E74C3C paprika */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 210 11% 15%;
+  --radius: 0.5rem;
+  
+  /* Custom Grawity colors */
+  --saffron: 28 100% 50%; /* #FF8500 */
+  --turmeric: 36 90% 55%; /* #F4A024 */
+  --paprika: 8 81% 57%; /* #E74C3C */
+  --cilantro: 145 63% 42%; /* #27AE60 */
+  --cardamom: 271 48% 53%; /* #8E44AD */
+  --garam-masala: 271 48% 40%; /* #6C3483 */
+  --warm-white: 0 0% 99%; /* #FEFEFE */
+  --charcoal: 210 11% 15%; /* #2C3E50 */
+}
+
+.dark {
+  --background: 222 84% 5%;
+  --foreground: 0 0% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --popover: 222 84% 5%;
+  --popover-foreground: 0 0% 98%;
+  --card: 222 84% 5%;
+  --card-foreground: 0 0% 98%;
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --primary: 28 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 8 81% 57%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 217 33% 17%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-saffron {
+    color: hsl(var(--saffron));
+  }
+  
+  .text-turmeric {
+    color: hsl(var(--turmeric));
+  }
+  
+  .text-paprika {
+    color: hsl(var(--paprika));
+  }
+  
+  .text-cilantro {
+    color: hsl(var(--cilantro));
+  }
+  
+  .text-cardamom {
+    color: hsl(var(--cardamom));
+  }
+  
+  .text-garam-masala {
+    color: hsl(var(--garam-masala));
+  }
+  
+  .text-warm-white {
+    color: hsl(var(--warm-white));
+  }
+  
+  .text-charcoal {
+    color: hsl(var(--charcoal));
+  }
+  
+  .bg-saffron {
+    background-color: hsl(var(--saffron));
+  }
+  
+  .bg-turmeric {
+    background-color: hsl(var(--turmeric));
+  }
+  
+  .bg-paprika {
+    background-color: hsl(var(--paprika));
+  }
+  
+  .bg-cilantro {
+    background-color: hsl(var(--cilantro));
+  }
+  
+  .bg-cardamom {
+    background-color: hsl(var(--cardamom));
+  }
+  
+  .bg-garam-masala {
+    background-color: hsl(var(--garam-masala));
+  }
+  
+  .bg-warm-white {
+    background-color: hsl(var(--warm-white));
+  }
+  
+  .bg-charcoal {
+    background-color: hsl(var(--charcoal));
+  }
+  
+  .gradient-saffron-turmeric {
+    background: linear-gradient(to right, hsl(var(--saffron)), hsl(var(--turmeric)));
+  }
+  
+  .gradient-cilantro-cardamom {
+    background: linear-gradient(to right, hsl(var(--cilantro)), hsl(var(--cardamom)));
+  }
+  
+  .gradient-paprika-garam-masala {
+    background: linear-gradient(to right, hsl(var(--paprika)), hsl(var(--garam-masala)));
+  }
+  
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-20px); 
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(100px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s ease-in-out infinite;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
