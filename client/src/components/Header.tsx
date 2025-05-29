@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Utensils } from "lucide-react";
+import { Menu, X, Utensils, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +21,10 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
-    { href: "/menu", label: "Menu" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/menu", label: t("nav.menu") },
+    { href: "/contact", label: t("nav.contact") },
   ];
 
   return (
@@ -89,6 +91,17 @@ export default function Header() {
                 </span>
               </Link>
             ))}
+            
+            {/* Language Toggle */}
+            <motion.button
+              onClick={() => setLanguage(language === "en" ? "hi" : "en")}
+              className="flex items-center space-x-1 text-charcoal hover:text-saffron transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Globe size={18} />
+              <span className="text-sm font-medium">{language === "en" ? "हिं" : "EN"}</span>
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
