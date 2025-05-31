@@ -1,4 +1,6 @@
 import { users, contactMessages, type User, type InsertUser, type ContactMessage, type InsertContactMessage } from "@shared/schema";
+import { db } from './db';
+import { eq } from 'drizzle-orm';
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -8,52 +10,30 @@ export interface IStorage {
   getAllContactMessages(): Promise<ContactMessage[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private contactMessages: Map<number, ContactMessage>;
-  private currentUserId: number;
-  private currentMessageId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.contactMessages = new Map();
-    this.currentUserId = 1;
-    this.currentMessageId = 1;
-  }
-
+export class DbStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const result = await db.select().from(users).where(eq(users.username, username));
+    return result[0];
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const result = await db.insert(users).values(insertUser).returning();
+    return result[0];
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
-    const id = this.currentMessageId++;
-    const message: ContactMessage = { 
-      ...insertMessage, 
-      id, 
-      createdAt: new Date() 
-    };
-    this.contactMessages.set(id, message);
-    return message;
+    const result = await db.insert(contactMessages).values(insertMessage).returning();
+    return result[0];
   }
 
   async getAllContactMessages(): Promise<ContactMessage[]> {
-    return Array.from(this.contactMessages.values()).sort(
-      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-    );
+    return await db.select().from(contactMessages).orderBy(contactMessages.createdAt);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DbStorage();
