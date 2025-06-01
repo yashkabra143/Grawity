@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Leaf, Pizza, Sprout, Flame, Coffee, Droplets, Eye, X, Package, Zap } from "lucide-react";
+import { Leaf, Pizza, Sprout, Flame, Coffee, Droplets, Eye, X, Package, Zap, LucideIcon } from "lucide-react";
 
 interface MenuItem {
   id: string;
@@ -13,7 +13,7 @@ interface MenuItem {
   image: string;
   category: "all" | "momos" | "appetizers" | "beverages";
   tags: string[];
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: LucideIcon;
   calories: number;
   packaging: string;
   ingredients: string[];
